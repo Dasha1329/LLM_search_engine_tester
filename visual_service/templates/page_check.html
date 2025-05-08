@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+  {% block content %}
+    <H1><a href="{{ url_for('project_main', id=data.project_id) }}">На страницу проекта</a></H1>
+    <H3>Номер примера {{ data.id }}</H3>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-sm">
+          <H1>Запрос</H1>
+          <H2 style="color:red;">{{ data.query_text }}</H2>
+        </div>
+      </div>
+
+      {% for item in data.items %}
+        {% if item.item_status == 'relevant' %}
+          <div class="p-3 mb-2 bg-success text-white">
+        {% else %}
+          <div class="p-3 mb-2 bg-danger text-white">
+        {% endif %}
+          <H1>Фото</H1>
+          <img src={{ item.image_link }} alt="альтернативный текст" width=300>
+
+          <H1>Название</H1>
+          <H2>{{ item.item_name }}</H2>
+
+          <H1>Статус</H1>
+          <H2>{{ item.item_status }}</H2>
+        </div>
+      {% endfor %}
+        
+      <form action={{ url_for('page_check', id=data.id) }} method="POST">
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.name != "csrf_token" %}
+          <div class="row">
+            <div class="col-sm-12">
+              <h1>{{ field.label }}</h1>
+
+              <p>{{ field(class='form-control') }}</p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="row mb-4">
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary mt-4">Сохранить</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  {% endblock %}

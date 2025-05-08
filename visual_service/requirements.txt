@@ -1,0 +1,10 @@
+Flask==2.2.2
+Flask-SQLAlchemy==3.0.3
+Flask-WTF==1.0.1
+pandas==1.5.2
+tqdm==4.64.1
+pyarrow==11.0.0
+Werkzeug==2.2.2
+flask_login==0.6.2
+email_validator==2.0.0.post2
+numpy==1.26

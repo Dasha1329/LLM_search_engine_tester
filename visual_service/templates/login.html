@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+  {% block content %}
+    <div class="container mt-4">
+      <form action={{ url_for('login') }} method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="input-group flex-nowrap mt-1">
+              {{ form.email(class='form-control') }}
+            </div>
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group flex-nowrap mt-1">
+              {{ form.password(class='form-control') }}
+            </div>
+          </div>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">{{ form.remember_me.label }}</label>
+          {{ form.remember_me }}
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+      </form>
+    </div>
+  {% endblock %}

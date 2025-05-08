@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      {% for msg in get_flashed_messages() %}
+        <p>{{msg}}</p>
+      {% endfor %}
+    </div>
+    <div class="bg-image" style="background-color: rgba(255, 255, 128, .5)">
+      <div class="container">
+        {% block content %}
+          <H3><a href="{{ url_for('create_project') }}">Создать проект</a><H3>
+          <H3><a href="{{ url_for('download_example') }}">Скачать пример входных данных для проекта</a><H3>
+          <H3><a href="{{ url_for('main') }}">Активные проекты</a><H3>
+          <H1>Архивные проекты</H1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Результаты</th>
+                {% if current_user.is_authenticated  %}
+                  <th scope="col">Удалить</th>
+                  <th scope="col">Cтатус</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in projects %}
+                <tr>
+                  <th scope="row"><a href="{{ url_for('project_main', id=item.id) }}">{{item.name}}</a></th>
+                  <td><a href="{{ url_for('download_project', id=item.id) }}">Скачать</a></td>
+                  {% if current_user.is_authenticated  %}
+                    <td><a href="{{ url_for('delete_project', id=item.id) }}">Удалить</a></td>
+                    <td><p>{{item.active_status}} <a href="{{ url_for('change_project_status', id=item.id) }}">Изменить статус</a></p></td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% endblock %}
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

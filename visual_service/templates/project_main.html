@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+  {% block content %}
+    <H1><a href="{{ url_for('main') }}">На главную</a></H1>
+    <H1>Легенда</H1>
+    <a class="btn btn-outline-primary" href=#>Это что не проверено</a>
+    <a class="btn btn-outline-success" href=#>Это матч, но без комментария</a>
+    <a class="btn btn-success" href=#>Это матч, с комментарием</a>
+    <a class="btn btn-outline-danger" href=#>Это не матч, без комментария</a>
+    <a class="btn btn-danger" href=#>Это не матч, с комментарием</a>
+    <H1>Статистика</H1>
+    <H3>Всего примеров {{stats[0]}} <H3>
+    <H1>Список кейсов</H1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Запрос</th>
+          <th scope="col">Комментарий</th>
+          <th scope="col">Точность</th>
+          <th scope="col">Кол-во ответов</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+          {% if item.precision < 1 or item.item_size < 10 %}
+            <tr class="bg-danger">
+          {% else %}
+            <tr>
+          {% endif %}
+            <th scope="row">{{ item.num }}</th>
+            <td><a class="btn btn{% if not item.comment|length > 0 %}-outline{% endif %}-success" href="{{ url_for('page_check', id=item.id) }}">{{ item.query_text }}</a></td>
+            <td>{{ item.comment }}</td>
+            <td>{{ item.precision }}</td>
+            <td>{{ item.item_size }}</td>
+          </tr>
+        {% endfor %}
+        
+      </tbody>
+    
+    </table>
+  {% endblock %}

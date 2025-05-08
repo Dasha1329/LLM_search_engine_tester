@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+  {% block content %}
+    <H1><a href="{{ url_for('main') }}">На главную</a></H1>
+    <H3><a href="{{ url_for('download_example') }}">Скачать пример входных данных для проекта</a><H3>
+    <div class="container mt-4">
+      <form action={{ url_for('create_project') }} method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.name != "csrf_token" %}
+          <div class="row">
+            <div class="col-sm-12">
+              <h1>{{ field.label }}</h1>
+
+              <p>{{ field(class='form-control') }}</p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="row">
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary mt-4">Создать</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  {% endblock %}
