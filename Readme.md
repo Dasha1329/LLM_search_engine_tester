@@ -1,18 +1,16 @@
-# Репозиторий по LLM тестировщику
+# LLM-based Search Engine Tester
+This project automates the relevance evaluation of product search results on Megamarket marketplace using Large Language Models (LLMs), including multimodal ones. It replaces manual quality checks with scalable, automated testing based on query-product matching (text and image).
 
-## Установка библиотке
 
-- `conda env create -f environment.yml`
+## Key Features
+- End-to-end pipeline for search engine evaluation
+- Relevance assessment using models like Qwen2.5-32B-Instruct and Qwen2-VL-72B-Instruct-AWQ
+- Prompt engineering experiments to improve classification accuracy
+- Error analysis and model behavior insights
+- Image-based product relevance assessment using multimodal LLMs
+ -Clustering and analysis of long-tail queries
+ 
+ 
+Author:
 
--  `source activate llm-tester`
-
-- `pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.4/`
-
-## Запуск
-
-- `python -m sglang.launch_server --model-path PATH_FOR_MODEL/Qwen2.5-32B-Instruct --tp 2 --port 30000`. Запускаем LLM
-
-- `bash run_testing.sh` Запускам процесс тестирования. *Важно!!! Нельзя запускать скрипт очень часто!!! Не чаще 1 раза в 5 минут*
-
-- Привет, я Даша
-- 
+Lyakhova Daria Alekseevna, HSE, Faculty of Computer Science, Data Science and Business Analytics 
